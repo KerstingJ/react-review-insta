@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import Header from '../components/Header.js'
+import PostContainer from '../components/PostContainer.js'
+import data from '../dummy-data.js'
 
 export default function(props){
 
+    // Posts from App
+    // Filtered Variation of posts
+
+    if (!props.user){
+        props.history.push("/");
+    }
+
+    useEffect(() => {
+        props.setPosts([...data])
+    }, [])
+
     return (
-        <div>
-            This is where i'd put all my posts
+        <div>  
+            <Header username={props.user} />
+            <PostContainer posts={props.posts || []} />
         </div>
     )
 }
+
